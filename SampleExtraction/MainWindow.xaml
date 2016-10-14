@@ -1,0 +1,46 @@
+﻿<Window x:Class="SampleExtraction.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SampleExtraction"
+        mc:Ignorable="d"
+        Title="样本提取器" Height="800" Width="1005" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Name="button" Content="换图" Height="30" Width="50" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="button_Click" IsDefault="True" />
+        <TextBlock Grid.Row="0" Name="textBlock_Width" Text="{Binding imageWidth,StringFormat='Width: {0}'}" Margin="100,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBlock Grid.Row="0" Name="textBlock_Height" Text="{Binding imageHeight,StringFormat='Height: {0}'}" Margin="180,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Label Grid.Row="0" Name="label_Position" Content="" Margin="300,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBlock Grid.Row="0" Name="textBlock_ImageCount" Text="{Binding imageCount,StringFormat='图片数: {0}'}" Margin="10,45,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBlock Grid.Row="0" Name="textBlock_FinishedCount" Text="{Binding finishedCount,StringFormat='完成: {0}'}" Margin="100,45,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Label Grid.Row="0" Content="跳转" Margin="10,60,0,0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBox Grid.Row="0" Name="textBox_Jump" Width="40" Height="26" Margin="60,60,0,0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Button Grid.Row="0" Name="button_Path" Content="读取目录" Height="30" Width="70" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="button_Path_Click" />
+        <Button Grid.Row="0" Name="button_WritePath" Content="存储目录" Height="30" Width="70" Margin="0,50,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Click="button_WritePath_Click" />
+        <CheckBox Grid.Row="0" Name="checkBox_AutoBounding" Content="自动标记" Margin="0,20,110,0" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        <CheckBox Grid.Row="0" Name="checkBox_Neg" Content="负样本专用" Margin="0,58,100,0" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        <RadioButton Grid.Row="0" Name="radioButton_Pos" GroupName="1" Content="正样本" FontSize="15" Margin="120,65,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <RadioButton Grid.Row="0" Name="radioButton_Neg" GroupName="1" Content="负样本" FontSize="15" Margin="200,65,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBlock Grid.Row="0" Name="textBlock_autoCheckTime" Text="{Binding autoCheckTime,StringFormat='用时: {0}'}" Margin="300,65,0,0" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBlock Grid.Row="0" Name="textBlock_autoCheckFaceCount" Text="{Binding faceCheckSuccessed,StringFormat='查到: {0}'}" Margin="0,40,300,0" FontSize="40" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        <ScrollViewer Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+            <StackPanel>
+                <Border BorderBrush="Blue" BorderThickness="3" >
+                    <Image Name="imageShow" Source="{Binding bitmapSource}"  HorizontalAlignment="Left" VerticalAlignment="Top" Height="700" Width="1000" MouseLeftButtonDown="imageShow_MouseLeftButtonDown" MouseMove="imageShow_MouseMove" MouseLeftButtonUp="imageShow_MouseLeftButtonUp" MouseRightButtonDown="imageShow_MouseRightButtonDown" />
+                </Border>
+                <Canvas Name="canvas_BoudingBox">
+                    <Border Canvas.Top="0" Canvas.Left="0" Grid.Row="1" Name="border_BoudingBox" BorderBrush="MidnightBlue" BorderThickness="3" HorizontalAlignment="Left" VerticalAlignment="Top" MouseLeftButtonUp="border_BoudingBox_MouseLeftButtonUp" >
+                        <Image Name="image_BoudingBox" />
+                    </Border>
+                </Canvas>
+            </StackPanel>
+        </ScrollViewer>
+
+
+        <!--<Image Name="image_BoudingBox" Source="{Binding boudingBoxBitmapSource}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="700" Width="1000" />-->    
+    </Grid>
+</Window>
